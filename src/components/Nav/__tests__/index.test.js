@@ -17,10 +17,15 @@ describe("Nav component", () => {
   // snapshot test
   it("matches snapshot", () => {
     const { asFragment } = render(<Nav />);
-    
     expect(asFragment()).toMatchSnapshot();
-    // assert value comparison
+  });
+});
 
-    
+// Emoji Visibility Test
+describe("emoji is visible", () => {
+  it("inserts emoji into the h2", () => {
+    const { getByLabelText } = render(<Nav />);
+
+    expect(getByLabelText("camera")).toHaveTextContent("📸");
   });
 });
