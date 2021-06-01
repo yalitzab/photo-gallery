@@ -12,6 +12,11 @@ function ContactForm() {
 
   const { name, email, message } = formState;
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formState);
+  }
+
   function handleChange(e) {
     if (e.target.name === "email") {
       const isValid = validateEmail(e.target.value);
@@ -22,15 +27,18 @@ function ContactForm() {
       } else {
         setErrorMessage("");
       }
+    } else {
+      if (!e.target.value.length) {
+        setErrorMessage(`${e.target.name} is required.`);
+      } else {
+        setErrorMessage("");
+      }
     }
-    setFormState({ ...formState, name: e.target.value });
+    if (!errorMessage) {
+      setFormState({ ...formState, [e.target.name]: e.target.value });
+    }
   }
   //   console.log(formState);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(formState);
-  }
 
   // JSX
   return (
@@ -64,6 +72,11 @@ function ContactForm() {
             rows="5"
           />
         </div>
+        {errorMessage && (
+          <div>
+            <p className="error-text">{errorMessage}</p>
+          </div>
+        )}
         <button type="submit">Submit</button>
       </form>
     </section>
