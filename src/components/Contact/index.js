@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { validateEmail } from "../../utils/helpers";
 
 function ContactForm() {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     message: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
   const { name, email, message } = formState;
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formState);
+    if (!errorMessage) {
+      setFormState({ [e.target.name]: e.target.value });
+      console.log("form", formState);
+    }
   }
 
   function handleChange(e) {
@@ -34,23 +36,19 @@ function ContactForm() {
         setErrorMessage("");
       }
     }
-    if (!errorMessage) {
-      setFormState({ ...formState, [e.target.name]: e.target.value });
-    }
   }
-  //   console.log(formState);
 
   // JSX
   return (
     <section>
-      <h1>Contact me</h1>
+      <h1 data-testid="h1tag">Contact me</h1>
       <form id="contact-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             defaultValue={name}
-            onChange={handleChange}
+            onBlur={handleChange}
             name="name"
           />
         </div>
@@ -60,7 +58,7 @@ function ContactForm() {
             type="email"
             defaultValue={email}
             name="email"
-            onChange={handleChange}
+            onBlur={handleChange}
           />
         </div>
         <div>
@@ -68,7 +66,7 @@ function ContactForm() {
           <textarea
             name="message"
             defaultValue={message}
-            onChange={handleChange}
+            onBlur={handleChange}
             rows="5"
           />
         </div>
@@ -77,7 +75,9 @@ function ContactForm() {
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <button data-testid="button" type="submit">
+          Submit
+        </button>
       </form>
     </section>
   );
