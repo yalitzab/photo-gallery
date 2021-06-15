@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { validateEmail } from "../../utils/helpers";
 
 function ContactForm() {
@@ -11,19 +12,17 @@ function ContactForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const { name, email, message } = formState;
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!errorMessage) {
       setFormState({ [e.target.name]: e.target.value });
-      console.log("form", formState);
+      console.log("Form", formState);
     }
-  }
+  };
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     if (e.target.name === "email") {
       const isValid = validateEmail(e.target.value);
-      console.log(isValid);
-      // isValid conditional statement
       if (!isValid) {
         setErrorMessage("Your email is invalid.");
       } else {
@@ -36,9 +35,8 @@ function ContactForm() {
         setErrorMessage("");
       }
     }
-  }
+  };
 
-  // JSX
   return (
     <section>
       <h1 data-testid="h1tag">Contact me</h1>
@@ -47,17 +45,17 @@ function ContactForm() {
           <label htmlFor="name">Name:</label>
           <input
             type="text"
+            name="name"
             defaultValue={name}
             onBlur={handleChange}
-            name="name"
           />
         </div>
         <div>
           <label htmlFor="email">Email address:</label>
           <input
             type="email"
-            defaultValue={email}
             name="email"
+            defaultValue={email}
             onBlur={handleChange}
           />
         </div>
@@ -65,9 +63,9 @@ function ContactForm() {
           <label htmlFor="message">Message:</label>
           <textarea
             name="message"
+            rows="5"
             defaultValue={message}
             onBlur={handleChange}
-            rows="5"
           />
         </div>
         {errorMessage && (
