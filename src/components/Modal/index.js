@@ -1,6 +1,7 @@
 import React from 'react';
 
-funtion Modal() {
+function Modal({currentPhoto}) {
+    const { name, category, description, index } = currentPhoto;
 
     return (
     <div className="modalBackdrop">
