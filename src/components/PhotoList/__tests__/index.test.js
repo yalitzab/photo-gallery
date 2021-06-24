@@ -6,12 +6,12 @@ import PhotoList from '..'
 
 afterEach(cleanup)
 
-describe('PhotoList is rendering', () => {
+describe('PhotoList component', () => {
   it('renders', () => {
     render(<PhotoList />);
   });
 
-  it('renders', () => {
+  it('renders component', () => {
     const { asFragment } = render(<PhotoList />)
     expect(asFragment()).toMatchSnapshot()
   });

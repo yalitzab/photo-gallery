@@ -1,16 +1,15 @@
 import React from 'react';
 
-function Modal({currentPhoto}) {
+function Modal({ onClose, currentPhoto}) {
     const { name, category, description, index } = currentPhoto;
-    const Modal = ({ onClose, currentPhoto }) => {
 
     return (
     <div className="modalBackdrop">
         <div className="modalContainer">
-            <h3 className="modalTitle">Photo Name</h3>
-            <img alt="current category" />
+            <h3 className="modalTitle">{name} </h3>
+            <img src={require(`../../assets/large/${category}/${index}.jpg`)} alt="current category" />
             <p>
-            Photo Description
+            {description}
             </p>
             <button onClick={onClose} type="button">
             Close this modal
@@ -18,6 +17,6 @@ function Modal({currentPhoto}) {
         </div>
     </div>
     );
-}}
+}
 
 export default Modal;

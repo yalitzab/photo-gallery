@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import Modal from '../'
+import Modal from '..'
 
 const mockToggleModal = jest.fn();
 const currentPhoto = {
@@ -11,7 +11,7 @@ const currentPhoto = {
     index: 1
   };
 
-afterEach(cleanup)
+afterEach(cleanup);
 
 describe('Modal component', () => {
     it('renders', () => {
@@ -26,7 +26,7 @@ describe('Modal component', () => {
         onClose={mockToggleModal}
         currentPhoto={currentPhoto}
       />)
-      
+
       expect(asFragment()).toMatchSnapshot()
     });
   });
